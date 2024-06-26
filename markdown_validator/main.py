@@ -15,7 +15,10 @@ defalut_llm = ChatOpenAI(openai_api_base=os.environ.get("OPENAI_API_BASE_URL", "
                         model_name=os.environ.get("MODEL_NAME", "gpt-3.5-turbo"),
                         top_p=0.3)
 
-
+llm = ChatOpenAI(
+    model="crewAI-llava-llama3",
+    base_url="http://localhost:11434/v1"
+)
 
 def process_markdown_document(filename):
     """
@@ -46,7 +49,7 @@ def process_markdown_document(filename):
                     allow_delegation=False, 
                     verbose=True,
                     tools=[markdown_validation_tool],
-                    llm=defalut_llm)
+                    llm=llm)
 
 
     # Define Tasks Using Crew Tools
